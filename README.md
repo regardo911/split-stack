@@ -10,6 +10,82 @@ practise them on.
 The book explains. This gives you the files, the commands, and something real to
 point them at.
 
+## One model becomes a team
+
+```mermaid
+flowchart TB
+    T["<b>“the reconciliation job double-charges.<br/>find the cause and fix it.”</b>"]
+    T --> R{{"<b>/architect</b><br/>has the decision already been made?"}}
+
+    subgraph TOP ["THE ARCHITECT · Fable 5 · $10/$50 per MTok · 1.0x · decides, never types"]
+        AUD["<b>audit</b> · what is broken · <i>ch04</i>"]
+        PLN["<b>plan</b> · what to build, in what order · <i>ch05</i>"]
+        AUD --> PLN
+    end
+
+    R -->|"no · <b>JUDGMENT</b>&nbsp;&nbsp;·&nbsp;&nbsp;both · <b>MIXED</b>"| AUD
+    R -->|"yes · <b>TYPING</b><br/>skip the ceremony"| HO
+
+    PLN --> HO[["<b>handoff.md</b> · the seam<br/>context · task · constraints · gate · escalation"]]
+
+    subgraph MID ["THE EXECUTOR BENCH · types, never decides · a blocker sends the diff back here"]
+        SON["<b>Sonnet 5</b><br/>$3/$15 · <b>0.3x</b><br/>specified logic"]
+        HAI["<b>Haiku 4.5</b><br/>$1/$5 · <b>0.1x</b><br/>mechanical, bounded"]
+        COD["<b>Codex</b> gpt-5.5<br/>the swappable slot"]
+    end
+
+    HO --> SON
+    HO --> HAI
+    HO --> COD
+
+    subgraph BOT ["THE ARCHITECT, INVITED BACK · one pass, then sent away"]
+        REV["<b>review</b> · is it safe to ship · <i>ch08</i>"]
+    end
+
+    SON --> REV
+    HAI --> REV
+    COD --> REV
+
+    REV --> SHIP(["<b>ship</b>"])
+    SHIP --> REC["<b>the same five-line fix, two ways</b><br/>all-Fable <b>$4.00</b> &nbsp;·&nbsp; split-stack <b>$0.21</b> &nbsp;·&nbsp; <b>18.6x</b>"]
+
+    classDef arch fill:#e7f0f6,stroke:#2a78d6,stroke-width:2px,color:#14304a
+    classDef exec fill:#e4f0e8,stroke:#1baf7a,stroke-width:2px,color:#0d3d2a
+    classDef seam fill:#eda100,stroke:#b87d00,stroke-width:2px,color:#231a00
+    classDef ship fill:#0ca30c,stroke:#087a08,color:#ffffff
+    classDef task fill:#ffffff,stroke:#6b675f,color:#1c1b19
+    classDef rec fill:#f4f2ec,stroke:#6b675f,stroke-width:2px,stroke-dasharray:5 4,color:#1c1b19
+    classDef box fill:#fbfaf7,stroke:#d8d1c3,color:#6b675f
+
+    class AUD,PLN,REV arch
+    class SON,HAI,COD exec
+    class HO seam
+    class SHIP ship
+    class T,R task
+    class REC rec
+    class TOP,MID,BOT box
+```
+
+Judgment at both ends, typing in the middle, and the expensive seat never touches the
+keyboard. The architect has exactly three jobs, and there is no fourth: it decides
+what is broken, what to build, and whether the work is safe to ship. Everything
+between those is keystrokes, and keystrokes go to whoever types them correctly for the
+least money.
+
+Every number above comes out of this repo's own code, not out of a slide. Reproduce
+the receipt yourself:
+
+```bash
+python3 chapters/03-estimate-a-task/estimate.py --model fable-5  --input 250000 --output 30000   # $4.00
+python3 chapters/03-estimate-a-task/estimate.py --compare        --input 250000 --output 30000   # every seat
+```
+
+One thing the diagram deliberately leaves out: the architect seat does not always hold
+the model you asked for. Fable's safety layer can decline a request, and Claude Code
+will quietly serve **Opus 4.8** instead and bill you $5/$25 for it. You get Opus-grade
+judgment while believing it was Fable-grade. [Chapter 9](chapters/09-fallback/) is the
+detector that catches it.
+
 ---
 
 ## Start here, fifteen minutes
