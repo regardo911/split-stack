@@ -1,0 +1,23 @@
+{
+  "_note": "Illustrative worked example (ch11): the book's three runs, MODELED from published rates with the ch03 cost() function. Worked estimates, not metered receipts. Nobody was billed these amounts.",
+  "runs": [
+    {
+      "config": "split-stack",
+      "cost_usd": 1.86,
+      "wall_clock_min": 18,
+      "cross_file_bug_caught": true
+    },
+    {
+      "config": "all-Fable",
+      "cost_usd": 2.95,
+      "wall_clock_min": 30,
+      "cross_file_bug_caught": true
+    },
+    {
+      "config": "all-Opus",
+      "cost_usd": 1.47,
+      "wall_clock_min": 22,
+      "cross_file_bug_caught": false
+    }
+  ]
+}

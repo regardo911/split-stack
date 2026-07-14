@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Node / the demo app's build output
+node_modules/
+dist/
+
+# Reader-generated artifacts: your own audit, plan, handoff, verdict and traces
+# belong in YOUR repo, not in this one.
+/audit.md
+/plan.md
+/verdict.md
+/handoff.md
+/my-runs.json
+/traces/
+docs/routes.log
+
+# Never commit a key. Nothing here needs one.
+.env
+.env.*

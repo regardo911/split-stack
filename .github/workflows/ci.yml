@@ -1,0 +1,58 @@
+name: ci
+
+# No secrets, no API keys, no network calls to any model provider.
+# The tools are stdlib-only; the demo app installs typescript + express from npm.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tools:
+    name: chapter tools (stdlib only)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Syntax-check everything
+        run: |
+          python3 -m compileall -q chapters tests
+          node --check chapters/06-handoff/contract-lint.js
+          bash -n chapters/08-review/gate.sh
+          bash -n chapters/08-review/needs-senior.sh
+          bash -n chapters/05-write-a-plan/plan-check.sh
+          bash -n install.sh
+
+      - name: Test the tools
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Test the shell + node checkers
+        run: bash tests/test_checkers.sh
+
+  demo-app:
+    name: demo/invoicing-api (compiles, boots, tests green)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install and test
+        working-directory: demo/invoicing-api
+        run: |
+          npm install
+          npm test

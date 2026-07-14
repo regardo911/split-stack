@@ -1,0 +1,5 @@
+# Illustrative worked example (ch08): a git diff --name-only list. Not a metered receipt.
+src/webhooks/payments.ts
+src/webhooks/verify.ts
+src/pdf/render.ts
+README.md

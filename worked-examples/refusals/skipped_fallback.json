@@ -1,0 +1,8 @@
+{
+  "stop_reason": "refusal",
+  "stop_details": {
+    "category": "cyber",
+    "recommended_model": "claude-opus-4-8",
+    "fallback_credit_token": "fct_9f2a"
+  }
+}

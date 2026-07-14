@@ -1,0 +1,25 @@
+{
+  "name": "invoicing-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small invoicing service: invoices, tax totals, PDF export, a payments webhook.",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "tsc && node --test dist/*.test.js dist/*/*.test.js",
+    "verify-gate": "node verify_gate.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
