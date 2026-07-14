@@ -46,9 +46,9 @@ model, where the entry that did the real work is the one with the highest `costU
 A cheap housekeeping model can show up in there too, which is why you take the max
 rather than the first key.
 
-`chapters/09-fallback/fallback.py` reads it correctly. The book's Appendix A6 still
-prints the `jq '.model'` form in its checklist, and that line is wrong. Trust the tool
-over the appendix on this one.
+`chapters/09-fallback/fallback.py` reads it correctly, and so does the `served=...`
+snippet in Chapter 9. If you are working from the Appendix A6 checklist, reach for the
+`.modelUsage` form above instead of `jq '.model'` — that correction is in `ERRATA.md`.
 
 ## The scripts are standalone on purpose, and that is not laziness
 
